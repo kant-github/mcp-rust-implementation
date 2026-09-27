@@ -1,0 +1,6 @@
+client/
+target/
+.git/
+.env
+*.md
+docs/

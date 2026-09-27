@@ -1,0 +1,56 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: mpc-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mpc
+      POSTGRES_PASSWORD: mpc
+      POSTGRES_DB: vault_api
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  
+  node-1:
+    build:
+      context: .
+      dockerfile: ./deploy/vault-node.Dockerfile
+    image: mpc/vault-node
+    container_name: vault-node-1
+    restart: unless-stopped
+    environment:
+      NODE_ID: node-1
+      PORT: 4000
+    ports:
+      - "4001:4000"
+
+  node-2:
+    build:
+      context: .
+      dockerfile: ./deploy/vault-node.Dockerfile
+    image: mpc/vault-node
+    container_name: vault-node-2
+    restart: unless-stopped
+    environment:
+      NODE_ID: node-2
+      PORT: 4000
+    ports:
+      - "4002:4000"
+
+  node-3:
+    build:
+      context: .
+      dockerfile: ./deploy/vault-node.Dockerfile
+    image: mpc/vault-node
+    container_name: vault-node-3
+    restart: unless-stopped
+    environment:
+      NODE_ID: node-3
+      PORT: 4000
+    ports:
+      - "4003:4000"
+
+volumes:
+  pgdata:
+
