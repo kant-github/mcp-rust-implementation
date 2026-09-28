@@ -17,3 +17,5 @@ sea-orm = { version = "1", features = [
     "runtime-tokio-rustls",
     "macros",
 ] }
+tower-http = { version = "0.7.1", features = ["cors"] }
+serde = { version = "1.0.229", features = ["derive"] }

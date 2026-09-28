@@ -3,5 +3,5 @@ export interface Wallet {
     name: string;
     address: string;
     status: "generating" | "ready" | "failed";
-    createdAt: string;
+    created_at: string;
 }

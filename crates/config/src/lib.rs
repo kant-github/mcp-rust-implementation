@@ -10,6 +10,7 @@ pub struct ApiConfig {
     pub port: String,
     pub node_urls: Vec<String>,
     pub database_url: String,
+    pub cors_origins: Vec<String>,
 }
 
 fn get(key: &str, default: &str) -> String {
@@ -42,6 +43,7 @@ pub fn load_node_config() -> Result<NodeConfig> {
 
 pub fn load_api_config() -> Result<ApiConfig> {
     let node_urls = split_parts(&get("NODE_URLS", ""));
+
     if node_urls.is_empty() {
         bail!("NODE_URLS is required");
     }
@@ -51,9 +53,15 @@ pub fn load_api_config() -> Result<ApiConfig> {
         bail!("DATABASE_URL is required");
     }
 
+    let cors_origins = split_parts(&get("CORS_ORIGINS", ""));
+    if cors_origins.is_empty() {
+        bail!("CORS_ORIGINS is required");
+    }
+
     Ok(ApiConfig {
         port: get("PORT", "4000"),
         node_urls,
         database_url,
+        cors_origins,
     })
 }

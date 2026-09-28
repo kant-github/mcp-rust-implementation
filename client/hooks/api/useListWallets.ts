@@ -6,7 +6,7 @@ export default function useListWallets() {
     return useQuery({
         queryKey: ["wallets"],
         queryFn: async () => {
-            const res = await api.get<Wallet[]>("/v1/wallets");
+            const res = await api.get<Wallet[]>("/v1/wallet");
             return res.data;
         },
     })

@@ -23,7 +23,7 @@ export default function WalletList() {
                     </div>
                     <p className="font-mono text-xs text-neutral-500">{w.address}</p>
                     <p className="mt-1 text-xs text-neutral-400">
-                        {new Date(w.createdAt).toLocaleString()}
+                        {new Date(w.created_at).toLocaleString()}
                     </p>
                 </li>
             ))}
