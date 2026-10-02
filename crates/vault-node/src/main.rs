@@ -1,6 +1,9 @@
 use axum::{Json, Router, extract::State, routing::get};
 use serde_json::{Value, json};
 
+mod envelope;
+mod mailbox;
+
 #[derive(Clone)]
 struct AppState {
     node_id: String,

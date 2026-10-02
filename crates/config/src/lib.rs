@@ -4,6 +4,8 @@ use std::env;
 pub struct NodeConfig {
     pub port: String,
     pub node_id: String,
+    pub node_urls: Vec<String>,
+    pub node_index: u16,
 }
 
 pub struct ApiConfig {
@@ -34,10 +36,21 @@ pub fn load_node_config() -> Result<NodeConfig> {
     if node_id.is_empty() {
         bail!("NODE_ID is required");
     }
+    let node_urls = split_parts(&get("NODE_URLS", ""));
+    if node_urls.len() != 3 {
+        bail!("NODE_URLS must list exactly 3 nodes");
+    }
+
+    let index = match get("NODE_INDEX", "").parse() {
+        Ok(i) if i < 3 => i,
+        _ => bail!("NODE_INDEX must be a number between 0 and 2"),
+    };
 
     Ok(NodeConfig {
         node_id,
         port: get("PORT", "4000"),
+        node_urls,
+        node_index: index,
     })
 }
 

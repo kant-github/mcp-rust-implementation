@@ -1,7 +1,6 @@
 use axum::{Json, Router, extract::State, http::StatusCode, routing::get};
 use sea_orm::DatabaseConnection;
 use serde::Deserialize;
-
 use crate::wallet::{model::Model, service};
 
 async fn list_wallets(db: State<DatabaseConnection>) -> Result<Json<Vec<Model>>, StatusCode> {
@@ -32,7 +31,7 @@ async fn create_wallet(
         return Err(StatusCode::BAD_REQUEST);
     }
 
-    let result = service::create(&db, body.name).await;
+    let result = service::create(&db, name.to_string()).await;
     match result {
         Ok(wallet) => Ok(Json(wallet)),
         Err(err) => {
