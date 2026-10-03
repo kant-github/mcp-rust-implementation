@@ -5,6 +5,7 @@ use std::{
 };
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender, unbounded_channel};
 
+#[derive(Debug)]
 struct MailBox {
     sender: UnboundedSender<Envelope>,
     reciever: Option<UnboundedReceiver<Envelope>>,
@@ -20,7 +21,7 @@ impl MailBox {
     }
 }
 
-#[derive(Default, Clone)]
+#[derive(Default, Clone, Debug)]
 pub struct MailBoxes {
     inner: Arc<Mutex<HashMap<String, MailBox>>>,
 }
