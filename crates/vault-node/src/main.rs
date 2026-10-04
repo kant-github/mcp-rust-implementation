@@ -1,8 +1,9 @@
 mod envelope;
 mod health;
 mod mailbox;
-mod routes;
 mod message;
+mod routes;
+mod session;
 
 #[tokio::main]
 async fn main() {

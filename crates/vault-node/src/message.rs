@@ -6,8 +6,6 @@ async fn recieve_message(
     State(mailboxes): State<MailBoxes>,
     Json(envelope): Json<Envelope>,
 ) -> StatusCode {
-    println!("Recieved message: {:?}", envelope);
-    println!("mailboxes : {:?}", mailboxes);
     mailboxes.deliver(envelope);
     StatusCode::ACCEPTED
 }
