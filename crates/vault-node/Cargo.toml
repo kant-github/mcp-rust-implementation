@@ -13,6 +13,7 @@ config = { path = "../config" }
 cggmp21 = { version = "0.6.3", features = ["curve-secp256k1"] }
 rand_core = { version = "0.6", features = ["getrandom"] }
 serde = { version = "1.0.229", features = ["derive"] }
+reqwest = { version = "0.13.5", features = ["json"] }
 
 [dev-dependencies]
 round-based = { version = "0.4", features = ["sim"] }

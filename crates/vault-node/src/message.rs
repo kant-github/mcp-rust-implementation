@@ -1,15 +1,15 @@
 use axum::{Json, Router, extract::State, http::StatusCode, routing::post};
 
-use crate::{envelope::Envelope, mailbox::MailBoxes};
+use crate::{envelope::Envelope, state::AppState};
 
 async fn recieve_message(
-    State(mailboxes): State<MailBoxes>,
+    State(state): State<AppState>,
     Json(envelope): Json<Envelope>,
 ) -> StatusCode {
-    mailboxes.deliver(envelope);
+    state.mailboxes.deliver(envelope);
     StatusCode::ACCEPTED
 }
 
-pub fn router() -> Router<MailBoxes> {
+pub fn router() -> Router<AppState> {
     Router::new().route("/message", post(recieve_message))
 }
